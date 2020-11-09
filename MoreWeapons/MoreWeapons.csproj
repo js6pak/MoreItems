@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <LangVersion>latest</LangVersion>
+
+        <Version>0.1.0</Version>
+        <Authors>js6pak</Authors>
+    </PropertyGroup>
+
+    <Import Project="..\..\SixModLoader\SCPSL.props" />
+    <ItemGroup>
+        <ProjectReference Include="..\..\MoreItems\MoreItems\MoreItems.csproj" />
+    </ItemGroup>
+
+    <Target Name="Copy" AfterTargets="Build">
+        <ItemGroup>
+            <OutputFiles Include="$(OutputPath)$(AssemblyName).dll" />
+        </ItemGroup>
+        <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(SCPSL_SERVER)\SixModLoader\mods\" Condition="'$(Configuration)' == 'Debug'" />
+    </Target>
+</Project>
